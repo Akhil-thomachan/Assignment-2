@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        /* Perplexity Design System */
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Background color tokens (Light Mode) */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+            --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+            /* Common style patterns */
+            --focus-ring: 0 0 0 3px var(--color-focus-ring);
+            --focus-outline: 2px solid var(--color-primary);
+            --status-bg-opacity: 0.15;
+            --status-border-opacity: 0.25;
+
+            /* RGB versions for opacity control */
+            --color-success-rgb: 33, 128, 141;
+            --color-error-rgb: 192, 21, 47;
+            --color-warning-rgb: 168, 75, 47;
+            --color-info-rgb: 98, 108, 113;
+
+            /* Typography */
+            --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.01em;
+
+            /* Spacing */
+            --space-0: 0;
+            --space-1: 1px;
+            --space-2: 2px;
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Base styles */
+        html {
+            font-size: var(--font-size-base);
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-normal);
+            color: var(--color-text);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-16) 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-20);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: var(--space-32);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            transition: all var(--duration-fast) var(--ease-standard);
+        }
+
+        .nav-link:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+        }
+
+        .nav-link.active {
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        /* Main content */
+        .main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            padding: var(--space-32) var(--space-20);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* View toggle buttons */
+        .view-toggles {
+            display: flex;
+            gap: var(--space-8);
+            margin-bottom: var(--space-24);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-10) var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            border: 1px solid var(--color-border);
+            text-decoration: none;
+            background: var(--color-surface);
+            color: var(--color-text);
+        }
+
+        .btn:hover {
+            background: var(--color-secondary);
+        }
+
+        .btn.active {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border-color: var(--color-primary);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border-color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+            border-color: var(--color-primary-hover);
+        }
+
+        /* Loading and error states */
+        .loading {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+
+        .error {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-error);
+            background: rgba(var(--color-error-rgb), 0.1);
+            border: 1px solid rgba(var(--color-error-rgb), 0.2);
+            border-radius: var(--radius-base);
+        }
+
+        /* Table view */
+        .employees-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .employees-table th,
+        .employees-table td {
+            padding: var(--space-16);
+            text-align: left;
+            border-bottom: 1px solid var(--color-card-border);
+        }
+
+        .employees-table th {
+            background: var(--color-bg-1);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+        }
+
+        .employees-table tbody tr:hover {
+            background: var(--color-bg-2);
+        }
+
+        .employees-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Card view */
+        .employees-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .employee-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+            box-shadow: var(--shadow-sm);
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        .employee-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .employee-card h3 {
+            margin: 0 0 var(--space-8) 0;
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-primary);
+        }
+
+        .employee-card p {
+            margin: 0;
+            color: var(--color-text-secondary);
+        }
+
+        .employee-id {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+        }
+
+        /* List view */
+        .employees-list {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .employee-list-item {
+            padding: var(--space-16) var(--space-20);
+            border-bottom: 1px solid var(--color-card-border);
+            transition: background var(--duration-fast) var(--ease-standard);
+        }
+
+        .employee-list-item:hover {
+            background: var(--color-bg-1);
+        }
+
+        .employee-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .employee-list-name {
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--space-4);
+            color: var(--color-text);
+        }
+
+        .employee-list-email {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .employee-list-id {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            float: right;
+        }
+
+        /* Form styles */
+        .form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--color-surface);
+            padding: var(--space-32);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-20);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text);
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: var(--space-12) var(--space-16);
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            transition: border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+        }
+
+        .form-control:focus {
+            border-color: var(--color-primary);
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .form-control.error {
+            border-color: var(--color-error);
+        }
+
+        .form-error {
+            color: var(--color-error);
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-4);
+        }
+
+        .success-message {
+            background: rgba(var(--color-success-rgb), 0.1);
+            color: var(--color-success);
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            border: 1px solid rgba(var(--color-success-rgb), 0.2);
+            margin-bottom: var(--space-20);
+            text-align: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 0 var(--space-16);
+                flex-direction: column;
+                gap: var(--space-16);
+            }
+
+            .navbar-nav {
+                gap: var(--space-16);
+            }
+
+            .main {
+                margin-top: 120px;
+                padding: var(--space-20) var(--space-16);
+            }
+
+            .employees-table {
+                font-size: var(--font-size-sm);
+            }
+
+            .employees-table th,
+            .employees-table td {
+                padding: var(--space-12);
+            }
+
+            .employees-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .form {
+                padding: var(--space-20);
+            }
+
+            .view-toggles {
+                justify-content: center;
+            }
+        }
+
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: var(--space-32);
+            color: var(--color-text);
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="navbar-brand">Employee Dashboard</a>
+            <ul class="navbar-nav">
+                <li><a href="#home" class="nav-link" id="nav-home">Home</a></li>
+                <li><a href="#employee-form" class="nav-link" id="nav-form">Employee Form</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Home/Dashboard Page -->
+            <div id="home-page" class="page">
+                <h1 class="page-title">Employee Dashboard</h1>
+                
+                <!-- View Toggle Buttons -->
+                <div class="view-toggles">
+                    <button class="btn active" id="table-view-btn">Table View</button>
+                    <button class="btn" id="card-view-btn">Card View</button>
+                    <button class="btn" id="list-view-btn">List View</button>
+                </div>
+
+                <!-- Content Area -->
+                <div id="employees-content">
+                    <!-- Loading state -->
+                    <div id="loading" class="loading">
+                        Loading employees...
+                    </div>
+                    
+                    <!-- Error state -->
+                    <div id="error" class="error" style="display: none;">
+                        <h3>Error Loading Employees</h3>
+                        <p>Unable to fetch employee data. Please try again later.</p>
+                        <button class="btn btn-primary" onclick="loadEmployees()">Retry</button>
+                    </div>
+
+                    <!-- Table View -->
+                    <div id="table-view" style="display: none;">
+                        <table class="employees-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Card View -->
+                    <div id="card-view" class="employees-cards" style="display: none;">
+                    </div>
+
+                    <!-- List View -->
+                    <div id="list-view" class="employees-list" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Form Page -->
+            <div id="form-page" class="page">
+                <h1 class="page-title">Add New Employee</h1>
+                
+                <form id="employee-form" class="form">
+                    <div id="success-message" class="success-message" style="display: none;">
+                        Employee added successfully!
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter employee name" required>
+                        <div class="form-error" id="name-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="designation">Designation</label>
+                        <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter designation" required>
+                        <div class="form-error" id="designation-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" required>
+                        <div class="form-error" id="location-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="salary">Salary</label>
+                        <input type="number" class="form-control" id="salary" name="salary" placeholder="Enter salary" required min="0">
+                        <div class="form-error" id="salary-error"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Employee</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Application state
+        let employees = [];
+        let currentView = 'table';
+        let currentPage = 'home';
+
+        // DOM elements
+        const homeLink = document.getElementById('nav-home');
+        const formLink = document.getElementById('nav-form');
+        const homePage = document.getElementById('home-page');
+        const formPage = document.getElementById('form-page');
+        const tableViewBtn = document.getElementById('table-view-btn');
+        const cardViewBtn = document.getElementById('card-view-btn');
+        const listViewBtn = document.getElementById('list-view-btn');
+        const employeeForm = document.getElementById('employee-form');
+        const successMessage = document.getElementById('success-message');
+        const loadingDiv = document.getElementById('loading');
+        const errorDiv = document.getElementById('error');
+        const tableView = document.getElementById('table-view');
+        const cardView = document.getElementById('card-view');
+        const listView = document.getElementById('list-view');
+
+        // API endpoint
+        const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
+
+        // Initialize application
+        function init() {
+            setupRouting();
+            setupEventListeners();
+            loadEmployees();
+        }
+
+        // Setup hash-based routing
+        function setupRouting() {
+            function handleRoute() {
+                const hash = window.location.hash || '#home';
+                navigateToPage(hash.substring(1));
+            }
+
+            window.addEventListener('hashchange', handleRoute);
+            handleRoute();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Navigation links
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.hash = 'home';
+            });
+
+            formLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.hash = 'employee-form';
+            });
+
+            // View toggle buttons
+            tableViewBtn.addEventListener('click', () => switchView('table'));
+            cardViewBtn.addEventListener('click', () => switchView('card'));
+            listViewBtn.addEventListener('click', () => switchView('list'));
+
+            // Form submission
+            employeeForm.addEventListener('submit', handleFormSubmission);
+        }
+
+        // Navigate to page
+        function navigateToPage(page) {
+            // Update active navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if (page === 'home') {
+                homeLink.classList.add('active');
+                homePage.classList.add('active');
+                formPage.classList.remove('active');
+                currentPage = 'home';
+            } else if (page === 'employee-form') {
+                formLink.classList.add('active');
+                formPage.classList.add('active');
+                homePage.classList.remove('active');
+                currentPage = 'employee-form';
+            }
+        }
+
+        // Load employees from API
+        async function loadEmployees() {
+            try {
+                loadingDiv.style.display = 'block';
+                errorDiv.style.display = 'none';
+                hideAllViews();
+
+                const response = await fetch(API_ENDPOINT);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                employees = data.map(emp => ({
+                    id: emp.id,
+                    name: emp.name,
+                    email: emp.email
+                }));
+
+                loadingDiv.style.display = 'none';
+                renderEmployees();
+            } catch (error) {
+                console.error('Error loading employees:', error);
+                loadingDiv.style.display = 'none';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // Switch between view modes
+        function switchView(viewType) {
+            currentView = viewType;
+            
+            // Update button states
+            document.querySelectorAll('.view-toggles .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            if (viewType === 'table') {
+                tableViewBtn.classList.add('active');
+            } else if (viewType === 'card') {
+                cardViewBtn.classList.add('active');
+            } else if (viewType === 'list') {
+                listViewBtn.classList.add('active');
+            }
+
+            renderEmployees();
+        }
+
+        // Hide all view containers
+        function hideAllViews() {
+            tableView.style.display = 'none';
+            cardView.style.display = 'none';
+            listView.style.display = 'none';
+        }
+
+        // Render employees based on current view
+        function renderEmployees() {
+            hideAllViews();
+
+            if (employees.length === 0) return;
+
+            switch (currentView) {
+                case 'table':
+                    renderTableView();
+                    break;
+                case 'card':
+                    renderCardView();
+                    break;
+                case 'list':
+                    renderListView();
+                    break;
+            }
+        }
+
+        // Render table view
+        function renderTableView() {
+            const tbody = document.getElementById('table-tbody');
+            tbody.innerHTML = '';
+
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${employee.id}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.email}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            tableView.style.display = 'block';
+        }
+
+        // Render card view
+        function renderCardView() {
+            cardView.innerHTML = '';
+
+            employees.forEach(employee => {
+                const card = document.createElement('div');
+                card.className = 'employee-card';
+                card.innerHTML = `
+                    <div class="employee-id">ID: ${employee.id}</div>
+                    <h3>${employee.name}</h3>
+                    <p>${employee.email}</p>
+                `;
+                cardView.appendChild(card);
+            });
+
+            cardView.style.display = 'grid';
+        }
+
+        // Render list view
+        function renderListView() {
+            listView.innerHTML = '';
+
+            employees.forEach(employee => {
+                const listItem = document.createElement('div');
+                listItem.className = 'employee-list-item';
+                listItem.innerHTML = `
+                    <div class="employee-list-id">#${employee.id}</div>
+                    <div class="employee-list-name">${employee.name}</div>
+                    <div class="employee-list-email">${employee.email}</div>
+                `;
+                listView.appendChild(listItem);
+            });
+
+            listView.style.display = 'block';
+        }
+
+        // Handle form submission
+        function handleFormSubmission(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearFormErrors();
+            
+            // Validate form
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            let isValid = true;
+            
+            // Validate required fields
+            const requiredFields = ['name', 'designation', 'location', 'salary'];
+            requiredFields.forEach(field => {
+                if (!data[field] || data[field].trim() === '') {
+                    showFieldError(field, 'This field is required');
+                    isValid = false;
+                }
+            });
+            
+            // Validate salary
+            if (data.salary && (isNaN(data.salary) || parseFloat(data.salary) < 0)) {
+                showFieldError('salary', 'Please enter a valid salary amount');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show success message
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                e.target.reset();
+                
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+                
+                // Scroll to top of form
+                document.querySelector('.form').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        }
+
+        // Show field error
+        function showFieldError(fieldName, message) {
+            const field = document.getElementById(fieldName);
+            const errorDiv = document.getElementById(`${fieldName}-error`);
+            
+            field.classList.add('error');
+            errorDiv.textContent = message;
+        }
+
+        // Clear form errors
+        function clearFormErrors() {
+            const fields = ['name', 'designation', 'location', 'salary'];
+            fields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                const errorDiv = document.getElementById(`${fieldName}-error`);
+                
+                field.classList.remove('error');
+                errorDiv.textContent = '';
+            });
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
